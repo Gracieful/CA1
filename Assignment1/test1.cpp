@@ -3,8 +3,9 @@
 int main()
 {
 /* -- Variables -- */
-    const int screenwidth = 800;
-    const int screenheight = 800;
+    const int screenwidth(800);
+    const int screenheight(800);
+    const int gravity(1000);
     int circle_posX = 400;
 	int circle_posY = 750;
     int radius = 50;
@@ -14,6 +15,8 @@ int main()
     int rect_posYD = 590;
 	int directionB = 5;
     int directionA = 15;
+    int velocity(10);
+    int carAVol(-200);
     bool collision{};
 
 
@@ -48,7 +51,7 @@ int main()
     frogPos.x = circle_posX;
     frogPos.y = circle_posY;
 
-/* -- Below is the variables for car A. If this works I'll be apply to other cars-- */
+/* -- Below is the variables for car A. If this works I'll be apply to other cars-- 
 
     Rectangle carARec;
     carARec.width = carA.width;
@@ -59,6 +62,7 @@ int main()
     Vector2 carAPos;
     carAPos.x = rect_posX; 
     carAPos.y = rect_posY;
+*/
 
  /*--   float frameHeight = (float)(frog.width/8.8); Commenting out as it wasn't blocking the image correctly. Assuming it's because the image wasn't divisable by 8(the amoun of images) --*/
 
@@ -107,8 +111,7 @@ int main()
 
         
  /* -- car A -- */
- 
-        DrawTexture(carA,carARec,carAPos,RAYWHITE);
+        DrawTexture(carA,(rect_posX),(rect_posY+(radius*-4)),RAYWHITE);
 
         rect_posX += directionB;
         if (rect_posX<(-20))
@@ -123,7 +126,7 @@ int main()
 
 /* -- car B -- */
 
-        DrawTexture(carB,(rect_posXD),(rect_posYD+(radius*-2)),RAYWHITE);
+        DrawTexture(carB,(rect_posXD),(rect_posYD+(radius*-8)),RAYWHITE);
 
         rect_posXD += directionA;
         if (rect_posXD<(-20))
