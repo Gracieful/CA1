@@ -3,8 +3,8 @@
 int main()
 {
 /* -- Variables -- */
-    int screenwidth = 800;
-    int screenheight = 800;
+    const int screenwidth = 800;
+    const int screenheight = 800;
     int circle_posX = 400;
 	int circle_posY = 750;
     int radius = 50;
@@ -22,7 +22,6 @@ int main()
     InitWindow(screenwidth,screenheight,"G Window");
     InitAudioDevice();
     SetTargetFPS(60);  
-
 /* -- audio -- */
     Sound ribbit = LoadSound("./Audio/croak.mp3");
     Sound backgroundnoise = LoadSound("./Audio/Background_noise.mp3");
@@ -36,32 +35,52 @@ int main()
     Texture2D carC = LoadTexture("./Textures/tester_Car.png");
     Texture2D carD = LoadTexture("./Textures/tester_Car.png");
 
+/* -- Below is the variables for the frog character -- */
+    
     Rectangle frogRec;
+/*-- keeping the wdith and height equal as there is currently no sprites --*/
+    frogRec.width = frog.width;
+    frogRec.height = frog.height;
+    frogRec.x = 0;
+    frogRec.y = 0;
+
+    Vector2 frogPos; 
+    frogPos.x = circle_posX;
+    frogPos.y = circle_posY;
+
+/* -- Below is the variables for car A. If this works I'll be apply to other cars-- */
+
     Rectangle carARec;
-    Rectangle carBRec;
-    Rectangle carCRec;
-    Rectangle carDRec;
+    carARec.width = carA.width;
+    carARec.height = carB.height;
+    carARec.x = 0;
+    carARec.y = 0;
 
-
-/* -- this will block out the sprites you don't want --*/
+    Vector2 carAPos;
+    carAPos.x = rect_posX; 
+    carAPos.y = rect_posY;
 
  /*--   float frameHeight = (float)(frog.width/8.8); Commenting out as it wasn't blocking the image correctly. Assuming it's because the image wasn't divisable by 8(the amoun of images) --*/
 
     while(!WindowShouldClose())
     {
+/* -- This is the code to get the window running and to load everything -- */
         BeginDrawing();
 
         ClearBackground(GREEN); 
-
-        PlaySound(backgroundnoise);
 
         DrawTexture(background,0,(screenheight-background.height),BROWN);
 
         DrawText("Score", 100,100, 20, BLACK);
 
+        PlaySound(backgroundnoise);
+
+        const float deltaTime{GetFrameTime()};
+
 /*-- Code to create the frog --*/
 
-        DrawTexture(frog,circle_posX,circle_posY,YELLOW);
+        DrawTexture(frog,frogRec,frogPos,YELLOW);
+
 
 /* -- Circle code  
         DrawCircle(circle_posX, circle_posY, radius, GREEN); --*/
@@ -89,7 +108,7 @@ int main()
         
  /* -- car A -- */
  
-        DrawTexture(carA,(rect_posX),(rect_posY),RAYWHITE);
+        DrawTexture(carA,carARec,carAPos,RAYWHITE);
 
         rect_posX += directionB;
         if (rect_posX<(-20))
@@ -151,7 +170,11 @@ int main()
     EndDrawing();
 }
 
-
+UnloadTexture(frog);
+UnloadTexture(carA);
+UnloadTexture(carB);
+UnloadTexture(carC);
+UnloadTexture(carD);
 CloseAudioDevice();
 CloseWindow();
 
