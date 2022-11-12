@@ -166,10 +166,10 @@ int main()
 	        rect_posXD = (-(carD.width/2));
         }
 
-/*--collosion code. You need to keep the textures in the else part of the statement as "if(collsiion) is when collision is true--*/
+/*--collosion code. You need to keep the textures in the else part of the statement as "if(collsiion)" is when collision is true--*/
         if (collision)
         {
-            
+
         DrawTexture(frog,frogRec,frogPos,RED);
 
         }
