@@ -5,7 +5,6 @@ int main()
 /* -- Variables -- */
     const int screenwidth(800);
     const int screenheight(800);
-    const int gravity(1000);
     int circle_posX = 400;
 	int circle_posY = 750;
     int radius = 50;
@@ -16,7 +15,6 @@ int main()
 	int directionB = 5;
     int directionA = 15;
     int velocity(10);
-    int carAVol(-200);
     bool collision{};
 
 
@@ -82,7 +80,8 @@ int main()
 /* -- delta time can be used to to make easier animations by using the frame time -- */
         const float deltaTime{GetFrameTime()};
 
-/* -- Below is the code to make the collison box code. When the boxes collide the if collision statement should apply-- */
+/* -- Below is the code to make the collison box code. When the boxes collide the if collision statement should apply. 
+These variables need to be after the while statment to keep it constant -- */
 
         Rectangle froggieRec 
         {
@@ -99,6 +98,11 @@ int main()
             carARec.height,
             carARec.width,
         };
+
+        if (CheckCollisionRecs(froggieRec,carAcrashRec))
+        {
+            collision = true;
+        }
 
 /*-- Code to create the frog --*/
 
