@@ -14,7 +14,6 @@ int main()
     int rect_posYD = 590;
 	int directionB = 5;
     int directionA = 15;
-    int velocity(10);
     bool collision{};
 
 
@@ -45,6 +44,7 @@ int main()
     frogRec.x = 0;
     frogRec.y = 0;
 
+/* -- I orginally used a circle for the intial code. Hence why it's "circle_pos"-- */
     Vector2 frogPos; 
     frogPos.x = circle_posX;
     frogPos.y = circle_posY;
@@ -77,7 +77,7 @@ int main()
 */
         PlaySound(backgroundnoise);
 
-/* -- delta time can be used to to make easier animations by using the frame time -- */
+/* -- delta time can be used to to make easier animations by using the frame time. I didn't manage to get this to work -- */
         const float deltaTime{GetFrameTime()};
 
 /* -- Below is the code to make the collison box code. When the boxes collide the if collision statement should apply. 
@@ -194,6 +194,8 @@ These variables need to be after the while statment to keep it constant -- */
         {
 
         DrawTexture(frog,frogRec,frogPos,RED);
+        circle_posX = 400;
+        circle_posY = 750;
 
         }
         else
