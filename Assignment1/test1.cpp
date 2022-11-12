@@ -110,7 +110,7 @@ int main()
             }
 
         
- /* -- car A -- 
+ /* -- car A -- */
         DrawTexture(carA,(rect_posX),(rect_posY+(radius*-4)),RAYWHITE);
 
         rect_posX += directionB;
