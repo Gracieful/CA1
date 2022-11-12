@@ -75,8 +75,6 @@ int main()
 
         DrawTexture(background,0,(screenheight-background.height),BROWN);
 
-        DrawText("Score", 100,100, 20, BLACK);
-
         PlaySound(backgroundnoise);
 
         const float deltaTime{GetFrameTime()};
@@ -110,7 +108,7 @@ int main()
             }
 
         
- /* -- car A -- */
+ /* -- car A -- 
         DrawTexture(carA,(rect_posX),(rect_posY+(radius*-4)),RAYWHITE);
 
         rect_posX += directionB;
