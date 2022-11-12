@@ -51,7 +51,7 @@ int main()
     frogPos.x = circle_posX;
     frogPos.y = circle_posY;
 
-/* -- Below is the variables for car A. If this works I'll be apply to other cars-- 
+/* -- Below is the variables for car A animation. If this works I'll be apply to other cars-- */
 
     Rectangle carARec;
     carARec.width = carA.width;
@@ -62,7 +62,6 @@ int main()
     Vector2 carAPos;
     carAPos.x = rect_posX; 
     carAPos.y = rect_posY;
-*/
 
  /*--   float frameHeight = (float)(frog.width/8.8); Commenting out as it wasn't blocking the image correctly. Assuming it's because the image wasn't divisable by 8(the amoun of images) --*/
 
@@ -85,9 +84,32 @@ int main()
 
         DrawTexture(frog,frogRec,frogPos,YELLOW);
 
+        bool CheckCollisionRecs
+        (
+            Rectangle froggieRec, 
+            Rectangle carAcrashRec
+        );
+/* this needs to be after the collision in the while loop so they stay updated. Make sure you have the width and hight correct as that's essentially the collision box */
+        Rectangle froggieRec
+        {
+            frogPos.x,
+            frogPos.y,
+            frogRec.height,
+            frogRec.width,      
+        };
 
-/* -- Circle code  
-        DrawCircle(circle_posX, circle_posY, radius, GREEN); --*/
+        Rectangle carAcrashRec
+        {
+            carAPos.x,
+            carAPos.y,
+            carARec.height,
+            carARec.width,
+        };
+
+        if(CheckCollisionRecs(froggieRec, carAcrashRec))
+            {
+                collision = true;
+            }
 
 /* -- frog movement --*/
         if (IsKeyDown(KEY_D)&& circle_posX <(screenwidth-frog.width))
