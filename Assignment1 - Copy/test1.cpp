@@ -1,97 +1,190 @@
 #include "raylib.h"
-struct Player {
-    Rectangle rect;
-    Vector2 speed;
-    Color color;
-};
-struct Bullets{
-	Rectangle rect;
-	Vector2 speed; 
-	Color color;
-	bool active;
-};
-int main(){
- const int windowWidth{500};
- const int windowHeight{500};
- int num_bullets{50};
-InitWindow(windowWidth,windowHeight,"My Window");
-InitAudioDevice(); 
-Player player;
-player.rect.height= 50;
-player.rect.width = 50;
-player.color = RED;
-player.rect.x = windowWidth/2;
-player.rect.y = windowHeight-player.rect.height;
-player.speed.x = 10;
-player.speed.y = 0;
+#include "raylib.h"
 
-Bullets bullet[num_bullets];
-for (int i = 0; i<num_bullets; i++){
-bullet[i].rect.height= 10;
-bullet[i].rect.width = 10;
-bullet[i].color = GREEN;
-bullet[i].rect.x = (windowWidth/2)+(player.rect.width/2)-(bullet[i].rect.width/2);
-bullet[i].rect.y = (windowHeight-player.rect.height)-(bullet[i].rect.height);
-bullet[i].speed.x = 50;
-bullet[i].speed.y = -10;
-bullet[i].active = false;}
-int shootRate = 0;
+int main()
+{
+/* -- Variables -- */
+    const int screenwidth(800);
+    const int screenheight(800);
+    const int gravity(1000);
+    int circle_posX = 400;
+	int circle_posY = 750;
+    int radius = 50;
+	int rect_posX = 0;
+	int rect_posY = 590;
+    int rect_posXD = 0;
+    int rect_posYD = 590;
+	int directionB = 5;
+    int directionA = 15;
+    int velocity(10);
+    int carAVol(-200);
+    bool collision{};
 
 
-Music music = LoadMusicStream("resources/sound.wav"); 
-Sound sound = LoadSound("resources/pickUp.wav");
-PlayMusicStream(music);
+ /*  DrawRectangle(screenwidth/2,posY,width,height,GREEN);*/
 
-SetTargetFPS(60);  
-	while(!WindowShouldClose()){
+    InitWindow(screenwidth,screenheight,"G Window");
+    InitAudioDevice();
+    SetTargetFPS(60);  
+/* -- audio -- */
+    Sound ribbit = LoadSound("./Audio/croak.mp3");
+    Sound backgroundnoise = LoadSound("./Audio/Background_noise.mp3");
 
-UpdateMusicStream(music); 
+/* -- code to call the texture --*/
 
-BeginDrawing();
-DrawRectangleRec(player.rect,player.color);
-    for (int i = 0; i < num_bullets; i++)
+    Texture2D frog = LoadTexture("./Textures/frog-sprite-backup.png");
+    Texture2D background = LoadTexture("./Textures/background.png");
+    Texture2D carA = LoadTexture("./Textures/tester_Car.png");
+    Texture2D carB = LoadTexture("./Textures/tester_Car.png");
+    Texture2D carC = LoadTexture("./Textures/tester_Car.png");
+    Texture2D carD = LoadTexture("./Textures/tester_Car.png");
+
+/* -- Below is the variables for the frog character -- */
+    
+    Rectangle frogRec;
+/*-- keeping the wdith and height equal as there is currently no sprites --*/
+    frogRec.width = frog.width;
+    frogRec.height = frog.height;
+    frogRec.x = 0;
+    frogRec.y = 0;
+
+    Vector2 frogPos; 
+    frogPos.x = circle_posX;
+    frogPos.y = circle_posY;
+
+/* -- Below is the variables for car A. If this works I'll be apply to other cars-- 
+
+    Rectangle carARec;
+    carARec.width = carA.width;
+    carARec.height = carB.height;
+    carARec.x = 0;
+    carARec.y = 0;
+
+    Vector2 carAPos;
+    carAPos.x = rect_posX; 
+    carAPos.y = rect_posY;
+*/
+
+ /*--   float frameHeight = (float)(frog.width/8.8); Commenting out as it wasn't blocking the image correctly. Assuming it's because the image wasn't divisable by 8(the amoun of images) --*/
+
+    while(!WindowShouldClose())
     {
-        if (bullet[i].active)
-            DrawRectangleRec(bullet[i].rect, bullet[i].color);
-    }
+/* -- This is the code to get the window running and to load everything -- */
+        BeginDrawing();
 
-    if (IsKeyDown(KEY_SPACE))
-    {
-        shootRate += 5;
-        for (int i = 0; i <num_bullets; i++)
-        {
-            if (!bullet[i].active && shootRate % 40 == 0)
+        ClearBackground(GREEN); 
+
+        DrawTexture(background,0,(screenheight-background.height),BROWN);
+
+        DrawText("Score", 100,100, 20, BLACK);
+
+        PlaySound(backgroundnoise);
+
+        const float deltaTime{GetFrameTime()};
+
+/*-- Code to create the frog --*/
+
+        DrawTexture(frog,frogRec,frogPos,YELLOW);
+
+
+/* -- Circle code  
+        DrawCircle(circle_posX, circle_posY, radius, GREEN); --*/
+
+/* -- frog movement --*/
+        if (IsKeyDown(KEY_D)&& circle_posX <(screenwidth-frog.width))
             {
-				PlaySound(sound);
-                bullet[i].rect.x = player.rect.x;
-                bullet[i].rect.y = player.rect.y + player.rect.height / 4;
-                bullet[i].active = true;
-				break;
+	            circle_posX += 5;
             }
-        }
-    }
-
-
-    for (int i = 0; i < num_bullets; i++)
-    {
-        if (bullet[i].active)
-        {
-           
-            bullet[i].rect.y += bullet[i].speed.y;
-
-            if (bullet[i].rect.y <= 0) 
+        if (IsKeyDown(KEY_A)&& circle_posX >0)
             {
-                bullet[i].active = false;
-                shootRate = 0;
+	            circle_posX -= 5;
             }
+        if (IsKeyDown(KEY_W)&& circle_posY >0)
+            {
+	            circle_posY -= 5;
+                PlaySound(ribbit);
+            }
+        if (IsKeyDown(KEY_S)&& circle_posY <(screenheight-frog.height))
+            {
+	            circle_posY += 5;
+                PlaySound(ribbit);
+            }
+
+        
+ /* -- car A -- 
+        DrawTexture(carA,(rect_posX),(rect_posY+(radius*-4)),RAYWHITE);
+
+        rect_posX += directionB;
+        if (rect_posX<(-20))
+        {
+	        directionB *= -1;
         }
-    }
+        if(rect_posX>(screenwidth-carA
+        .width))
+        {
+	        rect_posX = -19;
+        }
+*/
+/* -- car B -- */
+
+        DrawTexture(carB,(rect_posXD),(rect_posYD+(radius*-8)),RAYWHITE);
+
+        rect_posXD += directionA;
+        if (rect_posXD<(-20))
+        {
+	        directionA *= -1;
+        }
+        if(rect_posXD>(screenwidth-carB.width))
+        {
+	        rect_posXD = (-(carB.width/2));
+        }
+
+/* -- car C -- */
+
+        DrawTexture(carC,(rect_posX),(rect_posY+(radius*-4)),RAYWHITE);
+
+        rect_posX += directionB;
+        if (rect_posX<(-20))
+        {
+	        directionB *= -1;
+        }
+        if(rect_posX>(screenwidth-carC.width))
+        {
+	        rect_posX = -19;
+        }
+
+/*-- car D --*/
+
+        DrawTexture(carD,(rect_posXD),(rect_posYD+(radius*-6)),RAYWHITE);
+
+        rect_posXD += directionA;
+        if (rect_posXD<(-20))
+        {
+	        directionA *= -1;
+        }
+        if(rect_posXD>(screenwidth-carD.width))
+        {
+	        rect_posXD = (-(carD.width/2));
+        }
+
+/*--collosion code--*/
 
 
 
-ClearBackground(WHITE); 
-EndDrawing();
-}	
-CloseAudioDevice(); 
-CloseWindow();
+    EndDrawing();
 }
+
+UnloadTexture(frog);
+UnloadTexture(carA);
+UnloadTexture(carB);
+UnloadTexture(carC);
+UnloadTexture(carD);
+CloseAudioDevice();
+CloseWindow();
+
+return 0;
+}
+
+
+
+
