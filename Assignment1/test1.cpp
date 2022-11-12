@@ -33,10 +33,10 @@ int main()
 
     Texture2D frog = LoadTexture("./Textures/frog-sprite-backup.png");
     Texture2D background = LoadTexture("./Textures/background.png");
-    Texture2D carA = LoadTexture("./Textures/tester_Car.png");
-    Texture2D carB = LoadTexture("./Textures/tester_Car.png");
-    Texture2D carC = LoadTexture("./Textures/tester_Car.png");
-    Texture2D carD = LoadTexture("./Textures/tester_Car.png");
+    Texture2D carA = LoadTexture("./Textures/car_A.png");
+    Texture2D carB = LoadTexture("./Textures/car_A.png");
+    Texture2D carC = LoadTexture("./Textures/car_A.png");
+    Texture2D carD = LoadTexture("./Textures/car_A.png");
 
 /* -- Below is the variables for the frog character -- */
     
@@ -71,7 +71,7 @@ int main()
 /* -- This is the code to get the window running and to load everything -- */
         BeginDrawing();
 
-        ClearBackground(GREEN); 
+        ClearBackground(WHITE); 
 
         DrawTexture(background,0,(screenheight-background.height),BROWN);
 /*
@@ -111,7 +111,7 @@ int main()
 
         
  /* -- car A -- */
-        DrawTexture(carA,(rect_posX),(rect_posY+(radius*-4)),RAYWHITE);
+        DrawTexture(carA,(rect_posX),(rect_posY+(radius*-4)),WHITE);
 
         rect_posX += directionB;
         if (rect_posX<(-20))
@@ -126,7 +126,7 @@ int main()
 
 /* -- car B -- */
 
-        DrawTexture(carB,(rect_posXD),(rect_posYD+(radius*-8)),RAYWHITE);
+        DrawTexture(carB,(rect_posXD),(rect_posYD+(radius*-8)),GREEN);
 
         rect_posXD += directionA;
         if (rect_posXD<(-20))
@@ -140,7 +140,7 @@ int main()
 
 /* -- car C -- */
 
-        DrawTexture(carC,(rect_posX),(rect_posY+(radius*-4)),RAYWHITE);
+        DrawTexture(carC,(rect_posX),(rect_posY+(radius*-4)),PINK);
 
         rect_posX += directionB;
         if (rect_posX<(-20))
@@ -154,7 +154,7 @@ int main()
 
 /*-- car D --*/
 
-        DrawTexture(carD,(rect_posXD),(rect_posYD+(radius*-6)),RAYWHITE);
+        DrawTexture(carD,(rect_posXD),(rect_posYD+(radius*-6)),RED);
 
         rect_posXD += directionA;
         if (rect_posXD<(-20))
