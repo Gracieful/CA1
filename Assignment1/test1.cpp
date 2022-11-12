@@ -73,20 +73,39 @@ int main()
 
         ClearBackground(WHITE); 
 
-        DrawTexture(background,0,(screenheight-background.height),BROWN);
+        DrawTexture(background,0,(screenheight-background.height),GREEN);
 /*
-        DrawText("Score", 100,100, 20, BLACK);
+        DrawText("Score", 100,100, 20, BLACK); - commented out to test debug is picking up most recent revision
 */
         PlaySound(backgroundnoise);
 
+/* -- delta time can be used to to make easier animations by using the frame time -- */
         const float deltaTime{GetFrameTime()};
+
+/* -- Below is the code to make the collison box code. When the boxes collide the if collision statement should apply-- */
+
+        Rectangle froggieRec 
+        {
+            frogPos.x,
+            frogPos.y,
+            frogRec.height,
+            frogRec.width,
+        };
+
+        Rectangle carAcrashRec 
+        {
+            carAPos.x,
+            carAPos.y,
+            carARec.height,
+            carARec.width,
+        };
 
 /*-- Code to create the frog --*/
 
         DrawTexture(frog,frogRec,frogPos,YELLOW);
 
 
-/* -- Circle code  
+/* -- Circle code  this was used to test before importing sprites 
         DrawCircle(circle_posX, circle_posY, radius, GREEN); --*/
 
 /* -- frog movement --*/
