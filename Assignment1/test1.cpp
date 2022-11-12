@@ -167,7 +167,21 @@ int main()
         }
 
 /*--collosion code--*/
+        if (collision)
+        {
 
+        }
+        else
+        {
+
+         DrawTexture(frog,frogRec,frogPos,YELLOW);
+         DrawTexture(carA,(rect_posX),(rect_posY+(radius*-4)),WHITE);
+         DrawTexture(carB,(rect_posXD),(rect_posYD+(radius*-8)),GREEN);
+         DrawTexture(carC,(rect_posX),(rect_posY+(radius*-4)),PINK);
+         DrawTexture(carD,(rect_posXD),(rect_posYD+(radius*-6)),RED);
+
+
+        }
 
 
     EndDrawing();
