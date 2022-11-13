@@ -26,6 +26,11 @@ int main()
     Sound ribbit = LoadSound("./Audio/croak.mp3");
     Sound backgroundnoise = LoadSound("./Audio/Background_noise.mp3");
 
+/* -- Refrences for sounds--*/
+/* -- Croaking https://www.youtube.com/watch?v=UiidibfhidE--*/
+/*-- Background car sounds https://pixabay.com/sound-effects/highway-traffic-cars-and-street-sounds-8029/ --*/
+
+
 /* -- code to call the texture --*/
 
     Texture2D frog = LoadTexture("./Textures/frog-sprite-backup.png");
@@ -34,6 +39,12 @@ int main()
     Texture2D carB = LoadTexture("./Textures/car_A.png");
     Texture2D carC = LoadTexture("./Textures/car_A.png");
     Texture2D carD = LoadTexture("./Textures/car_A.png");
+
+/* -- Refrences for the textures --*/
+/* -- Car image - https://www.pngitem.com/middle/mRRmbh_line-pixel-car-racer-car-8-bit-car/ -- */
+/* -- Frog sprite - https://rpgtileset.com/sprite/large-frog-sprite-for-rpg-maker-mv/ -- */
+/* -- Road - https://opengameart.org/content/2d-top-down-highway-background -- */
+
 
 /* -- Below is the variables for the frog character -- */
     
