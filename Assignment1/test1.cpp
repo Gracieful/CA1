@@ -61,6 +61,7 @@ int main()
     frogPos.y = circle_posY;
 
 /* -- Below is the variables for car A. If this works I'll be apply to other cars-- */
+/* -- As I couldn't check if the collision box and the below variables worked, I didn't apply it to the other cars*/
 
     Rectangle carARec;
     carARec.width = carA.width;
